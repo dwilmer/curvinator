@@ -69,7 +69,7 @@ if ($formValues['submitted']) {
     $sections = $curvinator->getWidths($formValues['divisions']);
     echo '<ol start="0">';
     foreach ($sections as $width) {
-        printf('<li>height: %0.3f, width: %0.3f</li>', $width[0], $width[1]);
+        printf('<li>height: %0.3f, width: %0.3f, half width: %0.3f</li>', $width[0], $width[1], $width[1] / 2 );
     }
     echo '</ol>';
 } else {
