@@ -2,11 +2,6 @@
 
 class Curvinator {
 	/**
-	 * @var boolean
-	 */
-	private $curvature;
-	
-	/**
 	 * @var float|null
 	 */
 	private $sphereRadius;
@@ -23,13 +18,11 @@ class Curvinator {
 	
 	/**
 	 * Curvinator constructor.
-	 * @param bool $curvature
 	 * @param float $sphereRadius
 	 * @param float $radianBase
 	 * @param float $radianHeight
 	 */
-	public function __construct(bool $curvature, float $sphereRadius, float $radianBase, float $radianHeight) {
-		$this->curvature = $curvature;
+	public function __construct(float $sphereRadius, float $radianBase, float $radianHeight) {
 		$this->sphereRadius = $sphereRadius;
 		$this->radianBase = $radianBase;
 		$this->radianHeight = $radianHeight;
@@ -39,14 +32,13 @@ class Curvinator {
 	 * @param float $width
 	 * @param float $height
 	 * @param int $curve
-	 * @param bool $curvature
 	 * @return Curvinator
 	 */
-	public static function createFromWidthHeightCurve(float $width, float $height, int $curve, bool $curvature) {
+	public static function createFromWidthHeightCurve(float $width, float $height, int $curve) {
 		$radianHeight = (pi() * $curve) / 180;
 		$radius = $height / $radianHeight;
-		$radianWidth = $width / $radius;
-		return new Curvinator($curvature, $radius, $radianWidth, $radianHeight);
+		$radianWidth = asin($width / $radius);
+		return new Curvinator($radius, $radianWidth, $radianHeight);
 	}
 	
 	/**
@@ -99,11 +91,7 @@ class Curvinator {
 		
 		foreach ($positions as $position) {
 			$height = $position->getLatitude() * $this->sphereRadius;
-			if ($this->curvature) {
-				$circleRadiusAtLatitude = cos($position->getLatitude()) * $this->sphereRadius;
-			} else {
-				$circleRadiusAtLatitude = (1 - sin($position->getLatitude())) * $this->sphereRadius;
-			}
+			$circleRadiusAtLatitude = cos($position->getLatitude()) * $this->sphereRadius;
 			$width = sin($this->radianBase - ($position->getLongitude() * 2.0)) * $circleRadiusAtLatitude;
 			
 			$widths[] = [$height, $width];
@@ -116,6 +104,7 @@ class Curvinator {
 	 * Calculates the latitude and longitude of a point along a great circle, $length away from the azimuth.
 	 * @param float $azimuth
 	 * @param float $length
+	 * @return LatLong
 	 */
 	private function getLatLong($azimuth, $length) {
 		$latitude = atan2(cos($azimuth) * sin($length), sqrt(pow(cos($length), 2) + pow(sin($azimuth), 2) * pow(sin($length), 2)));

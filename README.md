@@ -11,7 +11,18 @@ Most of these calculations are adapted from https://en.wikipedia.org/wiki/Great-
 Note that we can position the triangle anywhere on the sphere, so we place the base on the equator and put the lower left corner on 0 longitude, simplifying many of those calculations.
 
 ## Practice
-T.B.D.
+On the form in the index.php file, fill in the height and width of the triangle you want, and the angle of the curve in degrees.
+The units for the height and width do not matter, as long as they are the same.
+This curve is the angle between the tip of the triangles when glued together, and a plane parallel to the base of the triangle.
+For example, if you want to cover a complete hemisphere, use 90 degrees.
+If the curve you want isn't that pronounced, only curving part of the way, use a lower number.
+
+For a better approximation of the curve, use more, narrow triangles.
+This does require better accuracy, not to mention more work, so experiment to see what's best for you.
+
+Finally, set the number of divisions. This determines the number of line segments that are calculated between the base and the tip.
+If set to 1 (the minimum), you will only get the points for the base and the tip — not very useful.
+I find 10 divisions a good value, but you can adapt it to your own needs.
 
 ## License
-T.B.D.
+See [The License file](LICENSE.md)
