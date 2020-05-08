@@ -7,7 +7,7 @@ In these models, you can find triangles that have curved sides. When these curve
 I approached this as if the triangles you want to lay out are part of a sphere, with the base on the equator.
 The sides of the triangle are then calculated by calculating the shortest path between the base and the tip of the triangle.
 As I am assuming spherical geometry, this means calculating the great circle (a circle with the same diameter and center as the sphere) through both points and finding way points on that.
-Most of these calculations are adapted from https://en.wikipedia.org/wiki/Great-circle_navigation
+Most of these calculations are adapted from [the Wikipedia article on Great-circle navigation](https://en.wikipedia.org/wiki/Great-circle_navigation).
 Note that we can position the triangle anywhere on the sphere, so we place the base on the equator and put the lower left corner on 0 longitude, simplifying many of those calculations.
 
 ## Practice
@@ -23,6 +23,9 @@ This does require better accuracy, not to mention more work, so experiment to se
 Finally, set the number of divisions. This determines the number of line segments that are calculated between the base and the tip.
 If set to 1 (the minimum), you will only get the points for the base and the tip — not very useful.
 I find 10 divisions a good value, but you can adapt it to your own needs.
+
+## Application
+This application is available online at <https://projects.daanwilmer.nl/curvinator/>
 
 ## License
 See [The License file](LICENSE.md)
